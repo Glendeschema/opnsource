@@ -11,10 +11,7 @@
             "value": "eastus"
         },
         "networkInterfaceName": {
-            "value": "vmname"
-        },
-        "networkSecurityGroupName": {
-            "value": "vmnamevm-nsg"
+            "value": "schemasrvvm-nsg"
         },
         "networkSecurityGroupRules": {
             "value": [
@@ -59,7 +56,7 @@
             "value": "10.0.1.0/24"
         },
         "publicIpAddressName": {
-            "value": "vmnamevm-ip"
+            "value": "schemasrvvm-ip"
         },
         "publicIpAddressType": {
             "value": "Dynamic"
@@ -68,7 +65,7 @@
             "value": "Basic"
         },
         "virtualMachineName": {
-            "value": "vmnamevm"
+            "value": "schemasrvvm"
         },
         "virtualMachineRG": {
             "value": "DockerRG"
@@ -97,7 +94,7 @@
 
         "dnsLabelPrefix" : {
 
-            "value": "vmname"
+            "value": "schemasrv"
         }
        
     }
