@@ -11,10 +11,10 @@
             "value": "eastus"
         },
         "networkInterfaceName": {
-            "value": "vmname"
+            "value": "linuxsrv"
         },
         "networkSecurityGroupName": {
-            "value": "vmnamevm-nsg"
+            "value": "linuxsrvvm-nsg"
         },
         "networkSecurityGroupRules": {
             "value": [
@@ -59,7 +59,7 @@
             "value": "10.0.1.0/24"
         },
         "publicIpAddressName": {
-            "value": "vmnamevm-ip"
+            "value": "linuxsrvvm-ip"
         },
         "publicIpAddressType": {
             "value": "Dynamic"
@@ -68,7 +68,7 @@
             "value": "Basic"
         },
         "virtualMachineName": {
-            "value": "vmnamevm"
+            "value": "linuxsrvvm"
         },
         "virtualMachineRG": {
             "value": "DockerRG"
@@ -80,10 +80,10 @@
             "value": "Standard_B1s"
         },
         "adminUsername": {
-            "value": "Username"
+            "value": "schema"
         },
         "adminPassword": {
-            "value": "P@SSW)RD"
+            "value": "Morolong1993"
         },
         "availabilitySetName": {
             "value": "DockerAVset"
@@ -97,7 +97,7 @@
 
         "dnsLabelPrefix" : {
 
-            "value": "vmname"
+            "value": "linuxsrv"
         }
        
     }
