@@ -174,7 +174,7 @@
             "location": "[parameters('location')]",
             "copy": {
                 "name": "virtualMachineLoop",
-                "count": 3
+                "count" : "[parameters('InstanceCount')]"
               },
             "properties": {
                 "publicIpAllocationMethod": "[parameters('publicIpAddressType')]" ,
@@ -195,7 +195,7 @@
             "location": "[parameters('location')]",
             "copy": {
                 "name": "virtualMachineLoop",
-                "count": 3
+                "count" : "[parameters('InstanceCount')]"
               },
             "dependsOn": [
                 "[concat(concat('Microsoft.Network/networkInterfaces/', parameters('networkInterfaceName')),copyindex())]",
