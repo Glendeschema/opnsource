@@ -77,10 +77,10 @@
             "value": "Standard_B1s"
         },
         "adminUsername": {
-            "value": "Username"
+            "value": "schema"
         },
         "adminPassword": {
-            "value": "P@SSW)RD"
+            "value": "Morolong1993"
         },
         "availabilitySetName": {
             "value": "DockerAVset"
