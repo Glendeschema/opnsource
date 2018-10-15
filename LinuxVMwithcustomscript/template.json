@@ -248,7 +248,7 @@
             "apiVersion": "2017-03-30",
             "location": "[parameters('location')]",
             "dependsOn": [
-              "[concat(parameters('virtualMachineName'),copyindex()))]"
+              "[concat(parameters('virtualMachineName'),copyindex())]"
             ],
             "properties": {
               "publisher": "Microsoft.Azure.Extensions",
