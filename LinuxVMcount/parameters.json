@@ -4,17 +4,17 @@
     "parameters": {
 
         "InstanceCount" : {
-            "value": 1
+            "value": 2
         } ,
         
         "location": {
             "value": "eastus"
         },
         "networkInterfaceName": {
-            "value": "linuxsrv"
+            "value": "vmname"
         },
         "networkSecurityGroupName": {
-            "value": "linuxsrvvm-nsg"
+            "value": "vmnamevm-nsg"
         },
         "networkSecurityGroupRules": {
             "value": [
@@ -59,7 +59,7 @@
             "value": "10.0.1.0/24"
         },
         "publicIpAddressName": {
-            "value": "linuxsrvvm-ip"
+            "value": "vmnamevm-ip"
         },
         "publicIpAddressType": {
             "value": "Dynamic"
@@ -68,7 +68,7 @@
             "value": "Basic"
         },
         "virtualMachineName": {
-            "value": "linuxsrvvm"
+            "value": "vmnamevm"
         },
         "virtualMachineRG": {
             "value": "DockerRG"
@@ -80,7 +80,7 @@
             "value": "Standard_B1s"
         },
         "adminUsername": {
-            "value": "schema"
+            "value": "Schema"
         },
         "adminPassword": {
             "value": "Morolong1993"
@@ -97,7 +97,7 @@
 
         "dnsLabelPrefix" : {
 
-            "value": "linuxsrv"
+            "value": "vmname"
         }
        
     }
