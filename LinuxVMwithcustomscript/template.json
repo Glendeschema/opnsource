@@ -257,7 +257,7 @@
               "autoUpgradeMinorVersion": true,
               "settings": {
                 "fileUris": [
-                  "https://raw.githubusercontent.com/glendeschema/opnsource/linuxshellscripts/ubuntusqldeploy.sh"
+                  "https://raw.githubusercontent.com/glendeschema/opnsource/master/linuxshellscripts/ubuntusqldeploy.sh"
                 ],
                 "commandToExecute": "sh ubuntusqldeploy.sh"
               }
