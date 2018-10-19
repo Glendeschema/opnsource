@@ -4,17 +4,14 @@
     "parameters": {
 
         "InstanceCount" : {
-            "value": 3
+            "value": 2
         } ,
         
         "location": {
-            "value": "eastus"
+            "value": "West Europe"
         },
         "networkInterfaceName": {
-            "value": "vmname"
-        },
-        "networkSecurityGroupName": {
-            "value": "vmnamevm-nsg"
+            "value": "dirkserver"
         },
         "networkSecurityGroupRules": {
             "value": [
@@ -46,6 +43,11 @@
                 }
             ]
         },
+
+        "networkSecurityGroupName" : {
+
+            "value": "dirkserver"
+        },
         "virtualNetworkName": {
             "value": "DockerVnet"
         },
@@ -59,7 +61,7 @@
             "value": "10.0.1.0/24"
         },
         "publicIpAddressName": {
-            "value": "vmnamevm-ip"
+            "value": "dirkserver-ip"
         },
         "publicIpAddressType": {
             "value": "Dynamic"
@@ -68,10 +70,10 @@
             "value": "Basic"
         },
         "virtualMachineName": {
-            "value": "vmnamevm"
+            "value": "dirkserver"
         },
         "virtualMachineRG": {
-            "value": "DockerRG"
+            "value": "TestRG"
         },
         "osDiskType": {
             "value": "Standard_LRS"
@@ -80,10 +82,10 @@
             "value": "Standard_B1s"
         },
         "adminUsername": {
-            "value": "Username"
+            "value": "schema"
         },
         "adminPassword": {
-            "value": "P@SSW)RD"
+            "value": "Morolong1993"
         },
         "availabilitySetName": {
             "value": "DockerAVset"
@@ -97,7 +99,7 @@
 
         "dnsLabelPrefix" : {
 
-            "value": "vmname"
+            "value": "dirkserver"
         }
        
     }
