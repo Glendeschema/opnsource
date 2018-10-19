@@ -195,7 +195,7 @@
             "location": "[parameters('location')]",
             "copy": {
                 "name": "virtualMachineLoop",
-                "count": 3
+                "count": "[parameters('InstanceCount')]"
               },
             "dependsOn": [
                 "[concat(concat('Microsoft.Network/networkInterfaces/', parameters('networkInterfaceName')),copyindex())]",
@@ -240,36 +240,43 @@
                 }
             },
             "tags": {}
-          
         },
         {
-            "type": "Microsoft.Compute/virtualMachines/extensions",
-            "name": "customscriptextension",
-            "apiVersion": "2017-03-30",
-            "location": "[parameters('location')]",
-            "dependsOn": [
-              "[concat(parameters('virtualMachineName'),copyindex())]"
-            ],
-            "properties": {
-              "publisher": "Microsoft.Azure.Extensions",
-              "type": "CustomScript",
-              "typeHandlerVersion": "2.0",
-              "autoUpgradeMinorVersion": true,
-              "settings": {
-                "fileUris": [
-                  "https://raw.githubusercontent.com/glendeschema/opnsource/master/linuxshellscripts/ubuntusqldeploy.sh"
-                ],
-                "commandToExecute": "sh ubuntusqldeploy.sh"
-              }
-            },
+        "type": "Microsoft.Compute/virtualMachines/extensions",
+         "name": "[concat(concat(parameters('VirtualMachineName'),copyindex(),'/installcustomscript'),copyindex())]",
+        "location": "[parameters('location')]",
+        "apiVersion": "2015-06-15",
+        "dependsOn" : [
+                
+            "[concat('Microsoft.Compute/virtualMachines/',concat(parameters('VirtualMachineName'),copyindex()))]"
+    
+        ] ,
+       
+        "tags": {
+            "displayName": "CustomScript"
+        },
+        "properties": {
+            "publisher": "Microsoft.OSTCExtensions",
+            "type": "CustomScriptForLinux" ,
+            "typeHandlerVersion": "1.5",
+            "autoUpgradeMinorVersion": true,
 
-            "copy": {
-                "name" : "script" ,
-                "count": 3
-            }
-        } 
-     
+           
+          "settings": {
+            "fileUris": [
+              "https://raw.githubusercontent.com/glendeschema/opnsource/master/linuxshellscripts/ubuntusqldeploy.sh"
+            ],
+            "commandToExecute": "sh ubuntusqldeploy.sh"
+          }
+        } ,
+
+        "copy": {
+            "name": "Scrpt" ,
+            "count": "[parameters('InstanceCount')]"
+        }
+        }
     ],
+
     "outputs": {
         "adminUsername": {
             "type": "string",
