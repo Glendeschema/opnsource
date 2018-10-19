@@ -6,6 +6,21 @@
         "InstanceCount" : {
             "value": 2
         } ,
+
+        "dnsNameforLBIP" : {
+
+"value": ""
+        },
+
+        "lbName" : {
+
+            "value": "linuxnlb"
+        },
+
+        "publicIPAddressName": {
+
+            "value": "myPublicIP"
+        },
         
         "location": {
             "value": "eastus"
