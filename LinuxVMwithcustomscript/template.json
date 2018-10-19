@@ -264,9 +264,9 @@
            
           "settings": {
             "fileUris": [
-              "https://raw.githubusercontent.com/glendeschema/opnsource/master/linuxshellscripts/ubuntusqldeploy.sh"
+              "https://raw.githubusercontent.com/glendeschema/opnsource/master/linuxshellscripts/apache2install.sh"
             ],
-            "commandToExecute": "sh ubuntusqldeploy.sh"
+            "commandToExecute": "sh apache2install.sh"
           }
         } ,
 
