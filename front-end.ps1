@@ -4,15 +4,26 @@ This app will be used by our internal store to capture and render sales.
 
 Run below 
  Install-Module SimplySql -Verbose -Force
+<<<<<<< HEAD
 
  if(!(get-module SimplySql)){
     Write-Output "Module will be installed"
     Install-Module SimplySql -Verbose -Force -Scope CurrentUser
     Pause
+=======
+#>
+
+
+
+if(!(get-module SimplySql)){
+    Write-Output "Module will be installed"
+    Install-Module SimplySql -Verbose -Force
+>>>>>>> e0b52b7fe7ede943530accb5bcb974d81469e391
 }
 else {
     Write-Host "Module is already installed....."  -ForegroundColor Blue
 }
+<<<<<<< HEAD
 #>
 
 
@@ -31,11 +42,13 @@ if (!$result){
 }
 
 
+=======
+>>>>>>> e0b52b7fe7ede943530accb5bcb974d81469e391
 
 #Creating SQL DB Connection to server
 
 
-$conn = Open-SqlConnection `
+Open-SqlConnection `
 -ConnectionName conn `
 -Server "schema.database.windows.net" `
 -Credential (Get-Credential -Message "Enter AzureSQL Login") `
@@ -48,8 +61,11 @@ Write-Host "Welcome to my Store...Please select the following options" -Foregrou
 Write-Host ""
 Write-Host "1-User Management - 2-stock inventory & Control 3-Creditors management 4-selling store" -ForegroundColor Blue
 
+<<<<<<< HEAD
 $option =Read-Host "enter option"
 
+=======
+>>>>>>> e0b52b7fe7ede943530accb5bcb974d81469e391
 function User-Management {
 
      param (
@@ -65,7 +81,11 @@ function User-Management {
     switch($option){
 
         1 {
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> e0b52b7fe7ede943530accb5bcb974d81469e391
             $name = read-host "Enter First Name"
             $surname = read-host "Enter Surname" 
             

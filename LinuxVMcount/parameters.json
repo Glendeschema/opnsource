@@ -5,16 +5,15 @@
 
         "InstanceCount" : {
             "value": 1
-        } ,
-        
+        } ,    
         "location": {
             "value": "eastus"
         },
         "networkInterfaceName": {
-            "value": "linuxsrv"
+            "value": "devbox"
         },
         "networkSecurityGroupName": {
-            "value": "linuxsrvvm-nsg"
+            "value": "devboxvm-nsg"
         },
         "networkSecurityGroupRules": {
             "value": [
@@ -47,19 +46,19 @@
             ]
         },
         "virtualNetworkName": {
-            "value": "DockerVnet"
+            "value": "Dev-Vnet"
         },
         "addressPrefix": {
             "value": "10.0.1.0/24"
         },
         "subnetName": {
-            "value": "default"
+            "value": "Dev"
         },
         "subnetPrefix": {
             "value": "10.0.1.0/24"
         },
         "publicIpAddressName": {
-            "value": "linuxsrvvm-ip"
+            "value": "devboxvm-ip"
         },
         "publicIpAddressType": {
             "value": "Dynamic"
@@ -68,7 +67,7 @@
             "value": "Basic"
         },
         "virtualMachineName": {
-            "value": "linuxsrvvm"
+            "value": "devbox"
         },
         "virtualMachineRG": {
             "value": "DockerRG"
@@ -77,7 +76,7 @@
             "value": "Standard_LRS"
         },
         "virtualMachineSize": {
-            "value": "Standard_B1s"
+            "value": "Standard_F1"
         },
         "adminUsername": {
             "value": "Schema"
@@ -97,7 +96,7 @@
 
         "dnsLabelPrefix" : {
 
-            "value": "linuxsrv"
+            "value": "devbox"
         }
        
     }
