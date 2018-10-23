@@ -4,22 +4,38 @@ This app will be used by our internal store to capture and render sales.
 
 Run below 
  Install-Module SimplySql -Verbose -Force
-#>
 
-
-
-if(!(get-module SimplySql)){
+ if(!(get-module SimplySql)){
     Write-Output "Module will be installed"
-    Install-Module SimplySql -Verbose -Force
+    Install-Module SimplySql -Verbose -Force -Scope CurrentUser
+    Pause
 }
 else {
     Write-Host "Module is already installed....."  -ForegroundColor Blue
 }
+#>
+
+
+$result = Import-Module SimplySql
+if (!$result){
+
+    if(!(get-module SimplySql)){
+        Write-Output "Module will be installed"
+        Install-Module SimplySql -Verbose -Force -Scope CurrentUser
+        Pause
+    }
+    else {
+        Write-Host "Module is already installed....."  -ForegroundColor Blue
+    }
+
+}
+
+
 
 #Creating SQL DB Connection to server
 
 
-Open-SqlConnection `
+$conn = Open-SqlConnection `
 -ConnectionName conn `
 -Server "schema.database.windows.net" `
 -Credential (Get-Credential -Message "Enter AzureSQL Login") `
@@ -31,6 +47,8 @@ Open-SqlConnection `
 Write-Host "Welcome to my Store...Please select the following options" -ForegroundColor blue
 Write-Host ""
 Write-Host "1-User Management - 2-stock inventory & Control 3-Creditors management 4-selling store" -ForegroundColor Blue
+
+$option =Read-Host "enter option"
 
 function User-Management {
 
@@ -47,7 +65,7 @@ function User-Management {
     switch($option){
 
         1 {
-
+            
             $name = read-host "Enter First Name"
             $surname = read-host "Enter Surname" 
             
@@ -63,8 +81,6 @@ function User-Management {
           }
           
         2 {
-
-        
 
             Write-Host " "
                $uID = read-host "Enter User ID"
@@ -86,11 +102,24 @@ function User-Management {
                    Write-Output "Data successfully updated"
                }
 
-               Close-SqlConnection -ConnectionName conn -Verbose
+             
 
 
 
           } 
+
+          3 {
+            $conn
+            $uID = Read-host "Enter user ID you want to Delete"
+
+            $result = Invoke-Sqlupdate -ConnectionName conn `
+            -Query "DELETE FROM stores.users WHERE uID = @uID" -Parameters @{uID= $uID} 
+
+            if($result){
+                Write-Output "User successfuly deleted"
+            }
+
+          }
 
 
 
@@ -101,3 +130,85 @@ function User-Management {
    
 }
 
+function stock-inventory {
+    param (
+        [string]$itemid ,
+        [string]$itemname ,
+        [int]$qty ,
+        [float]$price,
+        [int]$option
+    )
+
+    Write-Output "1 -Create new item 2-add quantity to item 3-update item 4-remove item"
+
+    $option = read-host "Enter option number"
+
+    switch ($option){
+
+        1 {
+
+            $conn
+
+            $itemname = Read-host "Enter Item Name"
+            $itemid = Read-host "Enter Item code"
+            $price = Read-host "Enter Item Price"  
+
+            $result = Invoke-SqlUpdate -ConnectionName conn `
+            -Query "INSERT INTO stores.Products (pID,ItemName,Price) VALUES (@itemid , @ItemName , @price)" `
+            -Parameters @{itemid = $itemid ; ItemName = $itemname ; price = $price}
+
+            if($result){
+                Write-Output "Item succesfully inserted "
+
+            }
+
+         
+          }
+
+        2{
+            $conn
+
+                $itemid = Read-host "Enter Item ID"
+                $qty = Read-host "Enter QTY"
+
+
+                $result = Invoke-SqlUpdate -ConnectionName conn `
+                -Query "INSERT INTO stores.Quantity (pID,QTY) VALUES (@pID,@qty)" -Parameters @{pID = $itemid ;qty=$qty }
+
+                if($result){
+
+                    write-output "Item Quantity successfully addded"
+                }
+         }
+
+        3{
+
+         }
+
+         4 {
+
+         }
+
+    }
+
+
+    
+}
+
+switch ($option){
+
+    1 {
+
+        User-Management #Function call
+       
+        pause
+        clear
+    }
+
+    2{
+        stock-inventory #Function call
+       
+        pause
+        clear
+    }
+}
