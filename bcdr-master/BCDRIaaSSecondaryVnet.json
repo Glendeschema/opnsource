@@ -1,0 +1,82 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {},
+    "variables": {
+        "BCDRFOVNetPrefix": "172.16.0.0/16",
+        "BCDRFOVNetSubnet2Name": "WEB",
+        "BCDRFOVNetSubnet2Prefix": "172.16.1.0/24",
+        "BCDRFOVNetSubnet3Name": "DATA",
+        "BCDRFOVNetSubnet3Prefix": "172.16.2.0/24",
+        "BCDRFOVNetSubnet4Name": "AD",
+        "BCDRFOVNetSubnet4Prefix": "172.16.3.0/24",
+        "PrimaryVnetResourceGroup": "BCDRIaaSPrimarySite",
+        "vNet1Name": "BCDRVNET",
+        "vNet2Name": "BCDRFOVNET",
+        "vNet2tovNet1PeeringName": "[concat(variables('vNet2Name'), '/peering-from-remote-vnet')]"
+    },
+    "resources": [
+        {
+            "name": "BCDRFOVNET",
+            "type": "Microsoft.Network/virtualNetworks",
+            "location": "[resourceGroup().location]",
+            "apiVersion": "2017-10-01",
+            "dependsOn": [],
+            "tags": {
+              "displayName": "BCDRFOVNET"
+            },
+            "properties": {
+              "addressSpace": {
+                "addressPrefixes": [
+                  "[variables('BCDRFOVNetPrefix')]"
+                ]
+              },
+              "dhcpOptions": {
+                "dnsServers": [
+                  "10.0.3.4",
+                  "8.8.8.8"
+                ]
+              },
+              "subnets": [
+                {
+                  "name": "[variables('BCDRFOVNetSubnet2Name')]",
+                  "properties": {
+                    "addressPrefix": "[variables('BCDRFOVNetSubnet2Prefix')]"
+                  }
+                },
+                {
+                  "name": "[variables('BCDRFOVNetSubnet3Name')]",
+                  "properties": {
+                    "addressPrefix": "[variables('BCDRFOVNetSubnet3Prefix')]"
+                  }
+                },
+                {
+                  "name": "[variables('BCDRFOVNetSubnet4Name')]",
+                  "properties": {
+                    "addressPrefix": "[variables('BCDRFOVNetSubnet4Prefix')]"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "apiVersion": "2018-08-01",
+            "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
+            "name": "[variables('vNet2tovNet1PeeringName')]",
+            "location": "[resourceGroup().location]",
+            "comments": "This is the peering from BCDRFOVNET to BCDRVNET",
+            "dependsOn": [
+              "[resourceId('Microsoft.Network/virtualNetworks', 'BCDRFOVNet')]"
+            ],      
+            "properties": {
+                "allowVirtualNetworkAccess": "true",
+                "allowForwardedTraffic": "false",
+                "allowGatewayTransit": "false",
+                "useRemoteGateways": "false",
+                "remoteVirtualNetwork": {
+                  "id": "[resourceId(variables('PrimaryVnetResourceGroup'), 'Microsoft.Network/virtualNetworks', variables('vnet1Name'))]"
+                }
+              }
+          }
+    ]
+}
