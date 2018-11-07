@@ -8,10 +8,13 @@
         } ,
         
         "location": {
-            "value": "West Europe"
+            "value": "eastus"
         },
         "networkInterfaceName": {
-            "value": "dirkserver"
+            "value": "rctdemos"
+        },
+        "networkSecurityGroupName": {
+            "value": "rctdemosvm-nsg"
         },
         "networkSecurityGroupRules": {
             "value": [
@@ -43,13 +46,8 @@
                 }
             ]
         },
-
-        "networkSecurityGroupName" : {
-
-            "value": "dirkserver"
-        },
         "virtualNetworkName": {
-            "value": "DockerVnet"
+            "value": "RCTVnet"
         },
         "addressPrefix": {
             "value": "10.0.1.0/24"
@@ -61,7 +59,7 @@
             "value": "10.0.1.0/24"
         },
         "publicIpAddressName": {
-            "value": "dirkserver-ip"
+            "value": "rctdemosvm-ip"
         },
         "publicIpAddressType": {
             "value": "Dynamic"
@@ -70,10 +68,10 @@
             "value": "Basic"
         },
         "virtualMachineName": {
-            "value": "dirkserver"
+            "value": "rctdemosvm"
         },
         "virtualMachineRG": {
-            "value": "TestRG"
+            "value": "rctdemosRG"
         },
         "osDiskType": {
             "value": "Standard_LRS"
@@ -82,13 +80,13 @@
             "value": "Standard_B1s"
         },
         "adminUsername": {
-            "value": "schema"
+            "value": "Schema"
         },
         "adminPassword": {
-            "value": "Morolong1993"
+            "value": "Morolong@1993"
         },
         "availabilitySetName": {
-            "value": "DockerAVset"
+            "value": "RCTAVSet"
         },
         "availabilitySetPlatformFaultDomainCount": {
             "value": 2
@@ -99,8 +97,9 @@
 
         "dnsLabelPrefix" : {
 
-            "value": "dirkserver"
+            "value": "rctdemos"
         }
        
-    }
+    } 
 }
+
