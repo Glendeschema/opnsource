@@ -6,13 +6,6 @@
         "InstanceCount":{
             "type": "int"
         },
-        "publicIPAddressName": {
-
-            "type": "string",
-      
-            "defaultValue": "myPublicIP"
-      
-        },
         "location": {
             "type": "string"
         },
@@ -77,31 +70,21 @@
 
             "type" :"string"
         },
-
-        "lbName" : {
-
+        "name": {
+            "type": "string"
+        },
+      
+        "sku": {
+            "type": "string"
+        },
+        "publicIPAddressName": {
             "type": "string"
         }
     },
     "variables": {
         "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]",
         "vnetId": "[resourceId(resourceGroup().name,'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
-        "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]" ,
-        "publicIPAddressType": "Dynamic",
-
-        "subnetRef1": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), variables ('subnetName'))]",
-    
-        "publicIPAddressID": "[resourceId('Microsoft.Network/publicIPAddresses',parameters('publicIPAddressName'))]",
-    
-        "numberOfInstances": 2,
-    
-        "lbID": "[resourceId('Microsoft.Network/loadBalancers',parameters('lbName'))]",
-    
-        "frontEndIPConfigID": "[concat(variables('lbID'),'/frontendIPConfigurations/LoadBalancerFrontEnd')]",
-    
-        "lbPoolID": "[concat(variables('lbID'),'/backendAddressPools/BackendPool1')]",
-    
-        "lbProbeID": "[concat(variables('lbID'),'/probes/tcpProbe')]"
+        "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]"
     },
     "resources": [
         {
@@ -201,7 +184,7 @@
             "location": "[parameters('location')]",
             "copy": {
                 "name": "virtualMachineLoop",
-                "count": 3
+                "count" : "[parameters('InstanceCount')]"
               },
             "properties": {
                 "publicIpAllocationMethod": "[parameters('publicIpAddressType')]" ,
@@ -222,7 +205,7 @@
             "location": "[parameters('location')]",
             "copy": {
                 "name": "virtualMachineLoop",
-                "count": "[parameters('InstanceCount')]"
+                "count" : "[parameters('InstanceCount')]"
               },
             "dependsOn": [
                 "[concat(concat('Microsoft.Network/networkInterfaces/', parameters('networkInterfaceName')),copyindex())]",
@@ -267,233 +250,82 @@
                 }
             },
             "tags": {}
+          
         },
         {
-        "type": "Microsoft.Compute/virtualMachines/extensions",
-         "name": "[concat(concat(parameters('VirtualMachineName'),copyindex(),'/installcustomscript'),copyindex())]",
-        "location": "[parameters('location')]",
-        "apiVersion": "2015-06-15",
-        "dependsOn" : [
-                
-            "[concat('Microsoft.Compute/virtualMachines/',concat(parameters('VirtualMachineName'),copyindex()))]"
-    
-        ] ,
-       
-        "tags": {
-            "displayName": "CustomScript"
-        },
-        "properties": {
-            "publisher": "Microsoft.OSTCExtensions",
-            "type": "CustomScriptForLinux" ,
-            "typeHandlerVersion": "1.5",
-            "autoUpgradeMinorVersion": true,
-
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+             "name": "[concat(concat(parameters('VirtualMachineName'),copyindex(),'/installcustomscript'),copyindex())]",
+            "location": "[parameters('location')]",
+            "apiVersion": "2015-06-15",
+            "dependsOn" : [
+                    
+                "[concat('Microsoft.Compute/virtualMachines/',concat(parameters('VirtualMachineName'),copyindex()))]"
+        
+            ] ,
            
-          "settings": {
-            "fileUris": [
-              "https://raw.githubusercontent.com/glendeschema/opnsource/master/linuxshellscripts/apache2install.sh"
-            ],
-            "commandToExecute": "sh apache2install.sh"
-          }
-        } ,
-
-        "copy": {
-            "name": "Scrpt" ,
-            "count": "[parameters('InstanceCount')]"
-        }
-        },
-        {
-
-            "apiVersion": "2015-05-01-preview",
-      
-            "type": "Microsoft.Network/publicIPAddresses",
-      
-            "name": "[parameters('publicIPAddressName')]",
-      
-            "location": "[resourceGroup().location]",
-      
+            "tags": {
+                "displayName": "CustomScript"
+            },
             "properties": {
-      
-              "publicIPAllocationMethod": "[variables('publicIPAddressType')]",
-      
-              "dnsSettings": {
-      
-                "domainNameLabel": "[parameters('dnsNameforLBIP')]"
-      
+                "publisher": "Microsoft.OSTCExtensions",
+                "type": "CustomScriptForLinux" ,
+                "typeHandlerVersion": "1.5",
+                "autoUpgradeMinorVersion": true,
+    
+               
+              "settings": {
+                "fileUris": [
+                  "https://raw.githubusercontent.com/glendeschema/opnsource/master/linuxshellscripts/apache2install.sh"
+                ],
+                "commandToExecute": "sh apache2install.sh"
               }
-      
+            } ,
+    
+            "copy": {
+                "name": "Scrpt" ,
+                "count": "[parameters('InstanceCount')]"
             }
-      
-          },
-        {
-
-            "apiVersion": "2015-05-01-preview",
-      
-            "name": "[parameters('lbName')]",
-      
-            "type": "Microsoft.Network/loadBalancers",
-      
-            "location": "[resourceGroup().location]",
-      
-            "dependsOn": [
-      
-              "[concat('Microsoft.Network/publicIPAddresses/', parameters('publicIPAddressName'))]"
-      
-            ],
-      
-            "properties": {
-      
-              "frontendIPConfigurations": [
-      
-                {
-      
-                  "name": "LoadBalancerFrontEnd",
-      
-                  "properties": {
-      
-                    "publicIPAddress": {
-      
-                      "id": "[variables('publicIPAddressID')]"
-      
-                    }
-      
-                  }
-      
-                }
-      
-              ],
-      
-              "backendAddressPools": [
-      
-                {
-      
-                  "name": "BackendPool1"
-      
-                }
-      
-              ],
-      
-              "inboundNatRules": [
-      
-                {
-      
-                  "name": "RDP-VM0",
-      
-                  "properties": {
-      
-                    "frontendIPConfiguration": {
-      
-                      "id": "[variables('frontEndIPConfigID')]"
-      
-                    },
-      
-                    "protocol": "tcp",
-      
-                    "frontendPort": 50001,
-      
-                    "backendPort": 3389,
-      
-                    "enableFloatingIP": false
-      
-                  }
-      
+            },
+            {
+                "apiVersion": "2018-08-01",
+                "name": "[parameters('name')]",
+                "type": "Microsoft.Network/loadBalancers",
+                "location": "[parameters('location')]",
+                "sku": {
+                    "name": "[parameters('sku')]"
                 },
-      
-                {
-      
-                  "name": "RDP-VM1",
-      
-                  "properties": {
-      
-                    "frontendIPConfiguration": {
-      
-                      "id": "[variables('frontEndIPConfigID')]"
-      
-                    },
-      
-                    "protocol": "tcp",
-      
-                    "frontendPort": 50002,
-      
-                    "backendPort": 3389,
-      
-                    "enableFloatingIP": false
-      
-                  }
-      
+                "dependsOn": [
+                    "[concat('Microsoft.Network/publicIPAddresses/', parameters('publicIPAddressName'))]" ,
+                    "[concat('Microsoft.Compute/virtualMachines/',concat(parameters('VirtualMachineName'),copyindex()))]"
+                ],
+                "properties": {
+                    "frontendIPConfigurations": [
+                        {
+                            "name": "LoadBalancerFrontEnd",
+                            "properties": {
+                                "publicIPAddress": {
+                                    "id": "[resourceId('TestRG1', 'Microsoft.Network/publicIPAddresses', parameters('publicIPAddressName'))]"
+                                }
+                            }
+                        }
+                    ]
                 }
-      
-              ],
-      
-              "loadBalancingRules": [
-      
-                {
-      
-                  "name": "LBRule",
-      
-                  "properties": {
-      
-                    "frontendIPConfiguration": {
-      
-                      "id": "[variables('frontEndIPConfigID')]"
-      
-                    },
-      
-                    "backendAddressPool": {
-      
-                      "id": "[variables('lbPoolID')]"
-      
-                    },
-      
-                    "protocol": "tcp",
-      
-                    "frontendPort": 80,
-      
-                    "backendPort": 80,
-      
-                    "enableFloatingIP": false,
-      
-                    "idleTimeoutInMinutes": 5,
-      
-                    "probe": {
-      
-                      "id": "[variables('lbProbeID')]"
-      
-                    }
-      
-                  }
-      
+            },
+            {
+                "apiVersion": "2018-08-01",
+                "type": "Microsoft.Network/publicIPAddresses",
+                "name": "[parameters('publicIPAddressName')]",
+                "location": "[parameters('location')]",
+                "sku": {
+                    "name": "[parameters('sku')]"
+                },
+                "properties": {
+                    "publicIPAllocationMethod": "Static",
+                    "publicIPAddressVersion": "IPv4"
                 }
-      
-              ],
-      
-              "probes": [
-      
-                {
-      
-                  "name": "tcpProbe",
-      
-                  "properties": {
-      
-                    "protocol": "tcp",
-      
-                    "port": 80,
-      
-                    "intervalInSeconds": 5,
-      
-                    "numberOfProbes": 2
-      
-                  }
-      
-                }
-      
-              ]
-      
             }
-      
-          },
+     
     ],
-
     "outputs": {
         "adminUsername": {
             "type": "string",

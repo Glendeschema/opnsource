@@ -4,17 +4,17 @@
     "parameters": {
 
         "InstanceCount" : {
-            "value": 1
+            "value": 2
         } ,
         
         "location": {
             "value": "eastus"
         },
         "networkInterfaceName": {
-            "value": "linuxsrv"
+            "value": "rctdemos"
         },
         "networkSecurityGroupName": {
-            "value": "linuxsrvvm-nsg"
+            "value": "rctdemosvm-nsg"
         },
         "networkSecurityGroupRules": {
             "value": [
@@ -47,7 +47,7 @@
             ]
         },
         "virtualNetworkName": {
-            "value": "DockerVnet"
+            "value": "RCTVnet"
         },
         "addressPrefix": {
             "value": "10.0.1.0/24"
@@ -59,7 +59,7 @@
             "value": "10.0.1.0/24"
         },
         "publicIpAddressName": {
-            "value": "linuxsrvvm-ip"
+            "value": "rctdemosvm-ip"
         },
         "publicIpAddressType": {
             "value": "Dynamic"
@@ -68,10 +68,10 @@
             "value": "Basic"
         },
         "virtualMachineName": {
-            "value": "linuxsrvvm"
+            "value": "rctdemosvm"
         },
         "virtualMachineRG": {
-            "value": "DockerRG"
+            "value": "rctdemosRG"
         },
         "osDiskType": {
             "value": "Standard_LRS"
@@ -86,7 +86,7 @@
             "value": "Morolong@1993"
         },
         "availabilitySetName": {
-            "value": "DockerAVset"
+            "value": "RCTAVSet"
         },
         "availabilitySetPlatformFaultDomainCount": {
             "value": 2
@@ -97,8 +97,9 @@
 
         "dnsLabelPrefix" : {
 
-            "value": "linuxsrv"
+            "value": "rctdemos"
         }
        
-    }
+    } 
 }
+
