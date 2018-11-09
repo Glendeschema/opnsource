@@ -4,17 +4,17 @@
     "parameters": {
 
         "InstanceCount" : {
-            "value": 2
+            "value": 3
         } ,
         
         "location": {
             "value": "eastus"
         },
         "networkInterfaceName": {
-            "value": "rctdemos"
+            "value": "rctsrv"
         },
         "networkSecurityGroupName": {
-            "value": "rctdemosvm-nsg"
+            "value": "rctsrvvm-nsg"
         },
         "networkSecurityGroupRules": {
             "value": [
@@ -53,13 +53,13 @@
             "value": "10.0.1.0/24"
         },
         "subnetName": {
-            "value": "default"
+            "value": "front-end"
         },
         "subnetPrefix": {
             "value": "10.0.1.0/24"
         },
         "publicIpAddressName": {
-            "value": "rctdemosvm-ip"
+            "value": "rctsrvvm-ip"
         },
         "publicIpAddressType": {
             "value": "Dynamic"
@@ -68,10 +68,10 @@
             "value": "Basic"
         },
         "virtualMachineName": {
-            "value": "rctdemosvm"
+            "value": "rctsrvvm"
         },
         "virtualMachineRG": {
-            "value": "rctdemosRG"
+            "value": "RCTRG"
         },
         "osDiskType": {
             "value": "Standard_LRS"
@@ -83,10 +83,10 @@
             "value": "Schema"
         },
         "adminPassword": {
-            "value": "Morolong@1993"
+            "value": "P@ssw0rd!"
         },
         "availabilitySetName": {
-            "value": "RCTAVSet"
+            "value": "RCTAvailabilitySet"
         },
         "availabilitySetPlatformFaultDomainCount": {
             "value": 2
@@ -97,9 +97,8 @@
 
         "dnsLabelPrefix" : {
 
-            "value": "rctdemos"
+            "value": "rctsrv"
         }
        
-    } 
+    }
 }
-
