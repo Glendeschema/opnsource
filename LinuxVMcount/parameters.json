@@ -4,7 +4,7 @@
     "parameters": {
 
         "InstanceCount" : {
-            "value": 3
+            "value": 1
         } ,
         
         "location": {
