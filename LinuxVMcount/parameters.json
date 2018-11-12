@@ -4,17 +4,17 @@
     "parameters": {
 
         "InstanceCount" : {
-            "value": 1
+            "value": 3
         } ,
         
         "location": {
             "value": "eastus"
         },
         "networkInterfaceName": {
-            "value": "DevOps"
+            "value": "thupavm"
         },
         "networkSecurityGroupName": {
-            "value": "DevOpsvm-nsg"
+            "value": "thupavmvm-nsg"
         },
         "networkSecurityGroupRules": {
             "value": [
@@ -59,7 +59,7 @@
             "value": "10.0.1.0/24"
         },
         "publicIpAddressName": {
-            "value": "DevOpsvm-ip"
+            "value": "thupavmvm-ip"
         },
         "publicIpAddressType": {
             "value": "Dynamic"
@@ -68,7 +68,7 @@
             "value": "Basic"
         },
         "virtualMachineName": {
-            "value": "DevOpsvm"
+            "value": "thupavmvm"
         },
         "virtualMachineRG": {
             "value": "RCTRG"
@@ -97,7 +97,7 @@
 
         "dnsLabelPrefix" : {
 
-            "value": "schemavmsrv"
+            "value": "thupavm"
         }
        
     }
