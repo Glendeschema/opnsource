@@ -11,10 +11,10 @@
             "value": "eastus"
         },
         "networkInterfaceName": {
-            "value": "rctsrv"
+            "value": "mpendulovm"
         },
         "networkSecurityGroupName": {
-            "value": "rctsrvvm-nsg"
+            "value": "mpendulovmvm-nsg"
         },
         "networkSecurityGroupRules": {
             "value": [
@@ -47,19 +47,19 @@
             ]
         },
         "virtualNetworkName": {
-            "value": "RCTVnet"
+            "value": "DockerVnet"
         },
         "addressPrefix": {
             "value": "10.0.1.0/24"
         },
         "subnetName": {
-            "value": "front-end"
+            "value": "default"
         },
         "subnetPrefix": {
             "value": "10.0.1.0/24"
         },
         "publicIpAddressName": {
-            "value": "rctsrvvm-ip"
+            "value": "mpendulovmvm-ip"
         },
         "publicIpAddressType": {
             "value": "Dynamic"
@@ -68,10 +68,10 @@
             "value": "Basic"
         },
         "virtualMachineName": {
-            "value": "rctsrvvm"
+            "value": "mpendulovmvm"
         },
         "virtualMachineRG": {
-            "value": "RCTRG"
+            "value": "DockerRG"
         },
         "osDiskType": {
             "value": "Standard_LRS"
@@ -83,10 +83,10 @@
             "value": "Schema"
         },
         "adminPassword": {
-            "value": "P@ssw0rd!"
+            "value": "Morolong@1993"
         },
         "availabilitySetName": {
-            "value": "RCTAvailabilitySet"
+            "value": "DockerAVset"
         },
         "availabilitySetPlatformFaultDomainCount": {
             "value": 2
@@ -97,7 +97,7 @@
 
         "dnsLabelPrefix" : {
 
-            "value": "rctsrv"
+            "value": "mpendulovm"
         }
        
     }
