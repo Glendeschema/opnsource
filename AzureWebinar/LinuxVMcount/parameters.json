@@ -11,7 +11,7 @@
             "value": "eastus"
         },
         "networkInterfaceName": {
-            "value": "rctsrv"
+            "value": "linuxsrv"
         },
         "networkSecurityGroupName": {
             "value": "rctsrvvm-nsg"
@@ -97,7 +97,7 @@
 
         "dnsLabelPrefix" : {
 
-            "value": "rctsrv"
+            "value": "linuxsrv"
         }
        
     }
