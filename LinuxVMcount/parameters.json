@@ -4,7 +4,7 @@
     "parameters": {
 
         "InstanceCount" : {
-            "value": 1
+            "value": 3
         } ,
         
         "location": {
@@ -97,7 +97,7 @@
 
         "dnsLabelPrefix" : {
 
-            "value": "schemavm"
+            "value": "schemavmsrv"
         }
        
     }
