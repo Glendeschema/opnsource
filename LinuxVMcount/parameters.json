@@ -11,10 +11,10 @@
             "value": "eastus"
         },
         "networkInterfaceName": {
-            "value": "rctsrv"
+            "value": "DevOps"
         },
         "networkSecurityGroupName": {
-            "value": "rctsrvvm-nsg"
+            "value": "DevOpsvm-nsg"
         },
         "networkSecurityGroupRules": {
             "value": [
@@ -59,7 +59,7 @@
             "value": "10.0.1.0/24"
         },
         "publicIpAddressName": {
-            "value": "rctsrvvm-ip"
+            "value": "DevOpsvm-ip"
         },
         "publicIpAddressType": {
             "value": "Dynamic"
@@ -68,7 +68,7 @@
             "value": "Basic"
         },
         "virtualMachineName": {
-            "value": "rctsrvvm"
+            "value": "DevOpsvm"
         },
         "virtualMachineRG": {
             "value": "RCTRG"
