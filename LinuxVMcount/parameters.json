@@ -4,7 +4,7 @@
     "parameters": {
 
         "InstanceCount" : {
-            "value": 4
+            "value": 2
         } ,
         
         "location": {
@@ -77,7 +77,7 @@
             "value": "Standard_LRS"
         },
         "virtualMachineSize": {
-            "value": "Standard_B1s"
+            "value": "Standard_DS2"
         },
         "adminUsername": {
             "value": "Schema"
