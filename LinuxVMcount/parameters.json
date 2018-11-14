@@ -77,7 +77,7 @@
             "value": "Standard_LRS"
         },
         "virtualMachineSize": {
-            "value": "Standard_DS2_V2"
+            "value": "Standard_A3"
         },
         "adminUsername": {
             "value": "Schema"
