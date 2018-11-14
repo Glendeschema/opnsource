@@ -11,10 +11,10 @@
             "value": "eastus"
         },
         "networkInterfaceName": {
-            "value": "thupavm"
+            "value": "glenvm"
         },
         "networkSecurityGroupName": {
-            "value": "thupavmvm-nsg"
+            "value": "glenvm-nsg"
         },
         "networkSecurityGroupRules": {
             "value": [
@@ -68,7 +68,7 @@
             "value": "Basic"
         },
         "virtualMachineName": {
-            "value": "thupavmvm"
+            "value": "glenvm"
         },
         "virtualMachineRG": {
             "value": "RCTRG"
@@ -77,7 +77,7 @@
             "value": "Standard_LRS"
         },
         "virtualMachineSize": {
-            "value": "Standard_DS2_v3"
+            "value": "Standard_DS2_V2"
         },
         "adminUsername": {
             "value": "Schema"
@@ -97,7 +97,7 @@
 
         "dnsLabelPrefix" : {
 
-            "value": "thupavm"
+            "value": "glenvm"
         }
        
     }
