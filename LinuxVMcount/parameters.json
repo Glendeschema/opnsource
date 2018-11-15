@@ -11,7 +11,7 @@
             "value": "eastus"
         },
         "networkInterfaceName": {
-            "value": "glenvm"
+            "value": "glenvmm"
         },
         "networkSecurityGroupName": {
             "value": "glenvm-nsg"
