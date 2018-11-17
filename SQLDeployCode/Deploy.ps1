@@ -1,3 +1,6 @@
+
+
+
 #region...Login & Set Variables for the entire Server
 
 Write-Host "Hello & Welcome, insert your Credentials to login to your Azure Subscription" -ForegroundColor Blue
@@ -8,6 +11,8 @@ Write-Host "Hello & Welcome, insert your Credentials to login to your Azure Subs
 
 $Resgroupname = "SqlResourcegroup-$(Get-Random -Maximum 10)"
 $location = "eastus"
+
+
 
 #You will be inserting the admin login and password for your server:
 $adminlogin = "SqlAdmin"
@@ -31,10 +36,14 @@ Write-host "You now creating a new Resourcegroup" -ForegroundColor Yellow
 
 #create the resourcegroup
 
+$rg = Get-AzureRmResourceGroup
+
+if ($rg.ResourceGroupName -ne $resourcegroup) {
+
 $resourcegroup = New-AzureRmResourceGroup `
     -Name $Resgroupname `
     -Location $location -Verbose
-
+}
 Write-Host "This is were you will create the SQL Server" -ForegroundColor Yellow
 
 #Create the SQL Server
@@ -71,3 +80,24 @@ $database = New-AzureRmSqlDatabase  -ResourceGroupName $Resgroupname `
 #endregion
 
 Write-Host "Gweng Blood, Kidding your SQL Database Server deployment is complete, Go check in the Portal" -ForegroundColor Red
+
+
+
+<#
+
+$Resgroupname = "SqlResourcegroup-$(Get-Random -Maximum 10)"
+$location = "eastus"
+
+#get existing resource Groups
+
+$rg = Get-AzureRmResourceGroup
+
+if ($rg.ResourceGroupName -ne $resourcegroup) {
+
+Write-Output "Creating Resource group"
+$resourcegroup = New-AzureRmResourceGroup `
+    -Name $Resgroupname `
+    -Location $location -Verbose
+}
+
+#>
