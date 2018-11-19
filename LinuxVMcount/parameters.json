@@ -4,14 +4,14 @@
     "parameters": {
 
         "InstanceCount" : {
-            "value": 2
+            "value": 3
         } ,
         
         "location": {
             "value": "eastus"
         },
         "networkInterfaceName": {
-            "value": "glenvmm"
+            "value": "acronisvm"
         },
         "networkSecurityGroupName": {
             "value": "glenvm-nsg"
@@ -68,7 +68,7 @@
             "value": "Basic"
         },
         "virtualMachineName": {
-            "value": "glenvm"
+            "value": "acronisvm"
         },
         "virtualMachineRG": {
             "value": "RCTRG"
@@ -97,7 +97,7 @@
 
         "dnsLabelPrefix" : {
 
-            "value": "glenvm"
+            "value": "schemavm"
         }
        
     }
