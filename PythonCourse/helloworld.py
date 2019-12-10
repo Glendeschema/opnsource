@@ -19,7 +19,7 @@ print(days_of_week)
 
 days_of_week.reverse() #reversing elements in an array
 days_of_week.remove("Glen")# Removing memeber of an array in list.
-days_of_week.sort(reverse=t)
+days_of_week.sort(reverse=false)
 
 print(days_of_week)
 

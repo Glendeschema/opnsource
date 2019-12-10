@@ -1,0 +1,11 @@
+# i want to add items in array dynamically
+
+num1 = range(1,10)
+num2 = range(1,10)
+
+for x in num1 :
+    for y in num2 :
+
+        z = [x , y]
+
+    print(z , 'Glen')
