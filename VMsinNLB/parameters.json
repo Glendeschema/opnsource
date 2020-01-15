@@ -1,0 +1,119 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+
+        "InstanceCount" : {
+            "value": 2
+        } ,
+
+        "dnsNameforLBIP" : {
+
+"value": ""
+        },
+
+        "lbName" : {
+
+            "value": "linuxnlb"
+        },
+
+        "publicIPAddressName": {
+
+            "value": "myPublicIP"
+        },
+        
+        "location": {
+            "value": "eastus"
+        },
+        "networkInterfaceName": {
+            "value": "linuxsrv"
+        },
+        "networkSecurityGroupName": {
+            "value": "linuxsrvvm-nsg"
+        },
+        "networkSecurityGroupRules": {
+            "value": [
+                {
+                    "name": "HTTP",
+                    "properties": {
+                        "priority": 300,
+                        "protocol": "TCP",
+                        "access": "Allow",
+                        "direction": "Inbound",
+                        "sourceAddressPrefix": "*",
+                        "sourcePortRange": "*",
+                        "destinationAddressPrefix": "*",
+                        "destinationPortRange": "80"
+                    }
+                },
+                {
+                    "name": "SSH",
+                    "properties": {
+                        "priority": 320,
+                        "protocol": "TCP",
+                        "access": "Allow",
+                        "direction": "Inbound",
+                        "sourceAddressPrefix": "*",
+                        "sourcePortRange": "*",
+                        "destinationAddressPrefix": "*",
+                        "destinationPortRange": "22"
+                    }
+                }
+            ]
+        },
+        "virtualNetworkName": {
+            "value": "DockerVnet"
+        },
+        "addressPrefix": {
+            "value": "10.0.1.0/24"
+        },
+        "subnetName": {
+            "value": "default"
+        },
+        "subnetPrefix": {
+            "value": "10.0.1.0/24"
+        },
+        "publicIpAddressName": {
+            "value": "linuxsrvvm-ip"
+        },
+        "publicIpAddressType": {
+            "value": "Dynamic"
+        },
+        "publicIpAddressSku": {
+            "value": "Basic"
+        },
+        "virtualMachineName": {
+            "value": "linuxsrvvm"
+        },
+        "virtualMachineRG": {
+            "value": "DockerRG"
+        },
+        "osDiskType": {
+            "value": "Standard_LRS"
+        },
+        "virtualMachineSize": {
+            "value": "Standard_B1s"
+        },
+        "adminUsername": {
+            "value": "Schema"
+        },
+        "adminPassword": {
+            "value": "Morolong@1993"
+        },
+        "availabilitySetName": {
+            "value": "DockerAVset"
+        },
+        "availabilitySetPlatformFaultDomainCount": {
+            "value": 2
+        },
+        "availabilitySetPlatformUpdateDomainCount": {
+            "value": 5
+        },
+
+        "dnsLabelPrefix" : {
+
+            "value": "linuxsrv"
+        }
+       
+    }
+}

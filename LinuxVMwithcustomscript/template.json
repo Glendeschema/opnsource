@@ -1,0 +1,335 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+
+        "InstanceCount":{
+            "type": "int"
+        },
+        "location": {
+            "type": "string"
+        },
+        "networkInterfaceName": {
+            "type": "string"
+        },
+        "networkSecurityGroupName": {
+            "type": "string"
+        },
+        "networkSecurityGroupRules": {
+            "type": "array"
+        },
+        "virtualNetworkName": {
+            "type": "string"
+        },
+        "addressPrefix": {
+            "type": "string"
+        },
+        "subnetName": {
+            "type": "string"
+        },
+        "subnetPrefix": {
+            "type": "string"
+        },
+        "publicIpAddressName": {
+            "type": "string"
+        },
+        "publicIpAddressType": {
+            "type": "string"
+        },
+        "publicIpAddressSku": {
+            "type": "string"
+        },
+        "virtualMachineName": {
+            "type": "string"
+        },
+        "virtualMachineRG": {
+            "type": "string"
+        },
+        "osDiskType": {
+            "type": "string"
+        },
+        "virtualMachineSize": {
+            "type": "string"
+        },
+        "adminUsername": {
+            "type": "string"
+        },
+        "adminPassword": {
+            "type": "secureString"
+        },
+        "availabilitySetName": {
+            "type": "string"
+        },
+        "availabilitySetPlatformFaultDomainCount": {
+            "type": "int"
+        },
+        "availabilitySetPlatformUpdateDomainCount": {
+            "type": "int"
+        },
+        "dnsLabelPrefix" : {
+
+            "type" :"string"
+        },
+        "name": {
+            "type": "string"
+        },
+      
+        "sku": {
+            "type": "string"
+        },
+        "publicIPAddressName": {
+            "type": "string"
+        }
+    },
+    "variables": {
+        "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]",
+        "vnetId": "[resourceId(resourceGroup().name,'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
+        "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]"
+    },
+    "resources": [
+        {
+            "name": "[concat(parameters('networkInterfaceName'),copyindex())]",
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2018-04-01",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[concat('Microsoft.Network/networkSecurityGroups/', parameters('networkSecurityGroupName'))]",
+                "[concat('Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName'))]",
+                "[concat(concat('Microsoft.Network/publicIpAddresses/', parameters('publicIpAddressName')),copyindex())]"
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "subnet": {
+                                "id": "[variables('subnetRef')]"
+                            },
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIpAddress": {
+                                "id": "[concat(resourceId(resourceGroup().name, 'Microsoft.Network/publicIpAddresses', parameters('publicIpAddressName')),copyindex())]"
+                            }
+                        }
+                    }
+                ],
+                "networkSecurityGroup": {
+                    "id": "[variables('nsgId')]"
+                }
+            },
+            "tags": {} ,
+            "copy": {
+                "name": "nicindex" ,
+                "count" : "[parameters('InstanceCount')]"
+            }
+        },
+        {
+
+            "type": "Microsoft.Compute/availabilitySets",
+      
+            "name": "[parameters('availabilitySetName')]",
+
+            "apiVersion": "2017-03-30",
+            "sku": {
+                "name": "Aligned"
+                },
+      
+            "location": "[parameters('location')]",
+      
+            "properties": {
+              
+              "platformFaultDomainCount": 3,
+      
+              "platformUpdateDomainCount": 20 
+           
+            }
+        
+           
+        },
+        {
+            "name": "[parameters('networkSecurityGroupName')]",
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "apiVersion": "2018-08-01",
+            "location": "[parameters('location')]",
+            "properties": {
+                "securityRules": "[parameters('networkSecurityGroupRules')]"
+            },
+            "tags": {}
+        },
+        {
+            "name": "[parameters('virtualNetworkName')]",
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2018-08-01",
+            "location": "[parameters('location')]",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "[parameters('addressPrefix')]"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "[parameters('subnetName')]",
+                        "properties": {
+                            "addressPrefix": "[parameters('subnetPrefix')]"
+                        }
+                    }
+                ]
+            },
+            "tags": {}
+        },
+        {
+            "name": "[concat(parameters('publicIpAddressName'),copyindex())]",
+            "type": "Microsoft.Network/publicIpAddresses",
+            "apiVersion": "2018-08-01",
+            "location": "[parameters('location')]",
+            "copy": {
+                "name": "virtualMachineLoop",
+                "count" : "[parameters('InstanceCount')]"
+              },
+            "properties": {
+                "publicIpAllocationMethod": "[parameters('publicIpAddressType')]" ,
+                "dnsSettings": {
+                    "domainNameLabel": "[concat(parameters('dnsLabelPrefix'),copyindex())]"
+                  }
+            },
+            "sku": {
+                "name": "[parameters('publicIpAddressSku')]"
+            },
+            "tags": {}
+          
+        },
+        {
+            "name": "[concat(parameters('virtualMachineName'),copyindex())]",
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2017-03-30",
+            "location": "[parameters('location')]",
+            "copy": {
+                "name": "virtualMachineLoop",
+                "count" : "[parameters('InstanceCount')]"
+              },
+            "dependsOn": [
+                "[concat(concat('Microsoft.Network/networkInterfaces/', parameters('networkInterfaceName')),copyindex())]",
+                "[concat('Microsoft.Compute/availabilitySets/', parameters('availabilitySetName'))]"
+            ],
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "[parameters('virtualMachineSize')]"
+                },
+               
+
+        "availabilitySet": {
+
+          "id": "[resourceId('Microsoft.Compute/availabilitySets/', parameters('availabilitySetName'))]"
+
+        },
+                "storageProfile": {
+                    "osDisk": {
+                        "createOption": "fromImage",
+                        "managedDisk": {
+                            "storageAccountType": "[parameters('osDiskType')]"
+                        }
+                    },
+                    "imageReference": {
+                        "publisher": "Canonical",
+                        "offer": "UbuntuServer",
+                        "sku": "18.04-LTS",
+                        "version": "latest"
+                    }
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[concat(resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaceName')),copyindex())]"
+                        }
+                    ]
+                },
+                "osProfile": {
+                    "computerName": "[parameters('virtualMachineName')]",
+                    "adminUsername": "[parameters('adminUsername')]",
+                    "adminPassword": "[parameters('adminPassword')]"
+                }
+            },
+            "tags": {}
+          
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+             "name": "[concat(concat(parameters('VirtualMachineName'),copyindex(),'/installcustomscript'),copyindex())]",
+            "location": "[parameters('location')]",
+            "apiVersion": "2015-06-15",
+            "dependsOn" : [
+                    
+                "[concat('Microsoft.Compute/virtualMachines/',concat(parameters('VirtualMachineName'),copyindex()))]"
+        
+            ] ,
+           
+            "tags": {
+                "displayName": "CustomScript"
+            },
+            "properties": {
+                "publisher": "Microsoft.OSTCExtensions",
+                "type": "CustomScriptForLinux" ,
+                "typeHandlerVersion": "1.5",
+                "autoUpgradeMinorVersion": true,
+    
+               
+              "settings": {
+                "fileUris": [
+                  "https://raw.githubusercontent.com/glendeschema/opnsource/master/linuxshellscripts/apache2install.sh"
+                ],
+                "commandToExecute": "sh apache2install.sh"
+              }
+            } ,
+    
+            "copy": {
+                "name": "Scrpt" ,
+                "count": "[parameters('InstanceCount')]"
+            }
+            },
+            {
+                "apiVersion": "2018-08-01",
+                "name": "[parameters('name')]",
+                "type": "Microsoft.Network/loadBalancers",
+                "location": "[parameters('location')]",
+                "sku": {
+                    "name": "[parameters('sku')]"
+                },
+                "dependsOn": [
+                    "[concat('Microsoft.Network/publicIPAddresses/', parameters('publicIPAddressName'))]" ,
+                    "[concat('Microsoft.Compute/virtualMachines/',concat(parameters('VirtualMachineName'),copyindex()))]"
+                ],
+                "properties": {
+                    "frontendIPConfigurations": [
+                        {
+                            "name": "LoadBalancerFrontEnd",
+                            "properties": {
+                                "publicIPAddress": {
+                                    "id": "[resourceId('TestRG1', 'Microsoft.Network/publicIPAddresses', parameters('publicIPAddressName'))]"
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "apiVersion": "2018-08-01",
+                "type": "Microsoft.Network/publicIPAddresses",
+                "name": "[parameters('publicIPAddressName')]",
+                "location": "[parameters('location')]",
+                "sku": {
+                    "name": "[parameters('sku')]"
+                },
+                "properties": {
+                    "publicIPAllocationMethod": "Static",
+                    "publicIPAddressVersion": "IPv4"
+                }
+            }
+     
+    ],
+    "outputs": {
+        "adminUsername": {
+            "type": "string",
+            "value": "[parameters('adminUsername')]"
+        }
+    }
+}
