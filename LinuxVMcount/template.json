@@ -3,11 +3,20 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
 
-        "InstanceCount":{
-            "type": "int"
+       "InstanceCount":{
+            "type": "int" ,
+               "defaultValue": 1,
+             "allowedValues" :[1 ,2 ,3, 4,5] ,
+          "metadata": {
+           "description": "Number of VMs between 1 and 2"
+                      }
         },
         "location": {
-            "type": "string"
+            "type": "string" ,
+            "allowedValues": [
+      "southafricanorth",
+      "southafricawest"
+    ]
         },
         "networkInterfaceName": {
             "type": "string"
