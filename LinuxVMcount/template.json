@@ -13,6 +13,7 @@
         },
         "location": {
             "type": "string" ,
+            "defaultValue" : "southafricanorth",
             "allowedValues": [
       "southafricanorth",
       "southafricawest"
