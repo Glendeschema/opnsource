@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
 
-       "InstanceCount":{
+       "InstanceCountAnsie":{
             "type": "int" ,
                "defaultValue": 1,
              "allowedValues" :[1 ,2 ,3, 4,5] ,
