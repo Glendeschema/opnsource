@@ -8,7 +8,7 @@
                "defaultValue": 1,
              "allowedValues" :[1 ,2 ,3, 4,5] ,
           "metadata": {
-           "description": "Number of VMs between 1 and 2"
+           "description": "Number of VMs between 1 and 2 and 3333333"
                       }
         },
         "location": {
