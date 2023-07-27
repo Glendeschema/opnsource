@@ -31,6 +31,9 @@
         "networkSecurityGroupName": {
             "value": "linuxsrvvm-nsg"
         },
+              "virtualMachineName": {
+            "value": "linuxsrvvm"
+        },
         "networkSecurityGroupRules": {
             "value": [
                 {
