@@ -82,9 +82,7 @@
         "publicIpAddressSku": {
             "value": "Basic"
         },
-        "virtualMachineName": {
-            "value": "linuxsrvvm"
-        },
+ 
         "virtualMachineRG": {
             "value": "DockerRG"
         },
