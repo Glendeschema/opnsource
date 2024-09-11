@@ -64,6 +64,36 @@ http {
         server 10.0.0.7;  # Replace with VM2's private IP
         server 10.0.0.8;  # Replace with VM1's private IP
         server 10.0.0.9;  # Replace with VM2's private IP
+        server 10.0.0.10;  # Replace with VM1's private IP
+        server 10.0.0.11;  # Replace with VM2's private IP
+        server 10.0.0.12;  # Replace with VM1's private IP
+        server 10.0.0.13;  # Replace with VM2's private IP
+        server 10.0.0.14;  # Replace with VM1's private IP
+        server 10.0.0.15;  # Replace with VM2's private IP
+        server 10.0.0.16;  # Replace with VM1's private IP
+        server 10.0.0.17;  # Replace with VM2's private IP
+        server 10.0.0.18;  # Replace with VM1's private IP
+        server 10.0.0.19;  # Replace with VM2's private IP
+        server 10.0.0.20;  # Replace with VM1's private IP
+        server 10.0.0.21;  # Replace with VM2's private IP
+        server 10.0.0.22;  # Replace with VM1's private IP
+        server 10.0.0.23;  # Replace with VM2's private IP
+        server 10.0.0.24;  # Replace with VM1's private IP
+        server 10.0.0.25;  # Replace with VM2's private IP
+        server 10.0.0.26;  # Replace with VM1's private IP
+        server 10.0.0.27;  # Replace with VM2's private IP
+        server 10.0.0.28;  # Replace with VM1's private IP
+        server 10.0.0.29;  # Replace with VM2's private IP
+        server 10.0.0.30;  # Replace with VM1's private IP
+        server 10.0.0.31;  # Replace with VM2's private IP
+        server 10.0.0.32;  # Replace with VM1's private IP
+        server 10.0.0.33;  # Replace with VM2's private IP
+        server 10.0.0.34;  # Replace with VM1's private IP
+        server 10.0.0.35;  # Replace with VM2's private IP
+        server 10.0.0.36;  # Replace with VM1's private IP
+        server 10.0.0.37;  # Replace with VM2's private IP
+        server 10.0.0.38;  # Replace with VM1's private IP
+        server 10.0.0.39;  # Replace with VM2's private IP
     }
 }
 EOF
